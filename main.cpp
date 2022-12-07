@@ -3,14 +3,14 @@ using namespace std;
 
 int main()
 {
-	//¿ÉÄÜÓÃµ½µÄº¯ÊıÉùÃ÷
+	//å¯èƒ½ç”¨åˆ°çš„å‡½æ•°å£°æ˜
 	void caesar_en(char arr[], int n1, int n2);
 	char arr[] = "0123456789 abcxyz ABCXYZ";
 	caesar_en(arr, 2, 2);
 	return 0;
 }
 
-//¿­ÈöÃÜÂë£º¼ÓÃÜ
+//å‡¯æ’’å¯†ç ï¼šåŠ å¯†
 void caesar_en(char arr[], int n1, int n2)
 {
 	if (n1 % 26 == 0)
