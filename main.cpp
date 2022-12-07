@@ -7,8 +7,8 @@ int main()
 	//可能用到的函数声明
 	void caesar_en(char arr[], int n1, int n2);
 	void caesar_de(char arr[], int n1, int n2);
-	char arr[] = "2345678901 cdezab CDEZAB";
-	caesar_de(arr, 2, 2);
+	char arr[] = "9012345678 zabcdefwxy ZABCDEFWXY";
+	caesar_de(arr, 25, 9);
 	return 0;
 }
 
@@ -80,3 +80,5 @@ void caesar_de(char arr[], int n1, int n2)
 	}
 	return;
 }
+
+//仿射密码
