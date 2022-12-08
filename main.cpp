@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <cstring>
+#include <vector>
 using namespace std;
 
 int main()
@@ -13,11 +14,10 @@ int main()
 	int bezout(int a, int n);
 	void affine_de(char arr[], int a1, int b1, int a2, int b2);
 	bool permut_test(int arr[], int n);
-	//char arr[] = "ABCDEFG xyz 1234567890";
-	//char arr[] = "FMTAHOV kry 5814703692";
-	//affine_de(arr,33,5,3,2);
-	int arr[5] = { 0,1,2,3,4 };
-	cout << permut_test(arr, 5);
+	void permut_en(char arr[], int arr0[], int n);
+	char arr[] = "abcdef123   456   789";
+	int arr0[3] = {2,0,1};
+	permut_en(arr, arr0,3);
 	return 0;
 }
 
@@ -185,7 +185,7 @@ bool permut_test(int arr[],int n)
 	for (int i = 0; i < n; i++)
 		arr0[i] = arr[i];
 	//排序
-	for (int i = 1; i < n; i++)
+	for (int i = 0; i < n; i++)
 	{
 		for (int j = n - 1; j > i; j--)
 		{
@@ -204,4 +204,37 @@ bool permut_test(int arr[],int n)
 	}
 	delete[] arr0;
 	return 1;
+}
+
+//置换密码：加密
+void permut_en(char arr[], int arr0[], int col)
+{
+	int length = strlen(arr);
+	if (length <= col || permut_test(arr0, col) == 0)
+	{
+		cout << "uneffective encryption";
+		cout << endl;
+		return;
+	}
+	else
+	{
+		if (length % col == 0)
+		{
+			int row = length / col;
+			char* temp = new char[length];
+			for (int i = 0; i < length; i++)
+			{
+				temp[i] = arr[i];
+			}
+			for (int i = 0; i < length; i++)
+			{
+				int j = i / col;
+				int k = i % col;
+				arr[i] = temp[j * col + arr0[k]];
+			}
+			delete[] temp;
+		}
+		cout << arr << endl;
+	}
+	return;
 }
