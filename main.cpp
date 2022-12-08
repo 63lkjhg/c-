@@ -9,6 +9,7 @@ int main()
 	void caesar_de(char arr[], int n1, int n2);
 	int gcd(int a, int b);
 	void affine_en(char arr[], int a1, int b1, int a2, int b2);
+	int bezout(int a, int n);
 	char arr[] = "algorithmsarequitegeneraldefinitionsofarrithmeticprocesses 65486874532118976453120";
 	affine_en(arr,3,5,3,2);
 	return 0;
@@ -98,13 +99,13 @@ int gcd(int a, int b)
 //仿射密码：加密
 void affine_en(char arr[], int a1, int b1,int a2,int b2)
 {
-	if (gcd(a1,26) != 1)
+	if (gcd(a1,26) != 1 || a1 <= 0)
 	{
 		cout << "uneffective decryption to letters";
 		cout << endl;
 		return;
 	}
-	else if (gcd(a2, 10) != 1)
+	else if (gcd(a2, 10) != 1 || a2 <= 0)
 	{
 		cout << "uneffective decryption to numbers";
 		cout << endl;
@@ -124,4 +125,16 @@ void affine_en(char arr[], int a1, int b1,int a2,int b2)
 		cout << arr << endl;
 	}
 
+}
+
+//裴蜀定理求s
+int bezout(int a,int n) 
+{
+	for (int i = 1; i < n; i++) 
+	{
+		if (a * i % n == 1) 
+		{
+			return i;
+		}
+	}
 }
