@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <cstring>
 using namespace std;
 
 int main()
@@ -11,9 +12,12 @@ int main()
 	void affine_en(char arr[], int a1, int b1, int a2, int b2);
 	int bezout(int a, int n);
 	void affine_de(char arr[], int a1, int b1, int a2, int b2);
+	bool permut_test(int arr[], int n);
 	//char arr[] = "ABCDEFG xyz 1234567890";
-	char arr[] = "FMTAHOV kry 5814703692";
-	affine_de(arr,33,5,3,2);
+	//char arr[] = "FMTAHOV kry 5814703692";
+	//affine_de(arr,33,5,3,2);
+	int arr[5] = { 0,1,2,3,4 };
+	cout << permut_test(arr, 5);
 	return 0;
 }
 
@@ -172,4 +176,32 @@ void affine_de(char arr[], int a1, int b1, int a2, int b2)
 		cout << arr << endl;
 	}
 	return;
+}
+
+//置换密码，检验给出的序列是否合法
+bool permut_test(int arr[],int n)
+{
+	int * arr0 = new int[n];
+	for (int i = 0; i < n; i++)
+		arr0[i] = arr[i];
+	//排序
+	for (int i = 1; i < n; i++)
+	{
+		for (int j = n - 1; j > i; j--)
+		{
+			if (arr0[j] < arr0[j - 1])
+			{
+				int temp = arr0[j];
+				arr0[j] = arr0[j - 1];
+				arr0[j - 1] = temp;
+			}
+		}
+	}
+	for (int i = 0; i < n; i++)
+	{
+		if (arr0[i] != i)
+			return 0;
+	}
+	delete[] arr0;
+	return 1;
 }
