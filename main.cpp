@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cmath>
 #include <cstring>
-#include <vector>
 using namespace std;
 
 int main()
@@ -15,7 +14,7 @@ int main()
 	void affine_de(char arr[], int a1, int b1, int a2, int b2);
 	bool permut_test(int arr[], int n);
 	void permut_en(char arr[], int arr0[], int n);
-	char arr[] = "abcdef123   456   789";
+	char arr[] = "abcdef123";
 	int arr0[3] = {2,0,1};
 	permut_en(arr, arr0,3);
 	return 0;
@@ -233,6 +232,11 @@ void permut_en(char arr[], int arr0[], int col)
 				arr[i] = temp[j * col + arr0[k]];
 			}
 			delete[] temp;
+		}
+		else
+		{
+			cout << "the length of sentence must be a multiple of column" << endl;
+			return;
 		}
 		cout << arr << endl;
 	}
