@@ -7,6 +7,7 @@ int main()
 {
 	//可能用到的函数声明
 	void caesar_en(char arr[], int n1, int n2);
+	char caesar_de_class(char n, int m);
 	void caesar_de(char arr[], int n1, int n2);
 	int gcd(int a, int b);
 	void affine_en(char arr[], int a1, int b1, int a2, int b2);
@@ -14,10 +15,12 @@ int main()
 	void affine_de(char arr[], int a1, int b1, int a2, int b2);
 	bool permut_test(int arr[], int n);
 	void permut_en(char arr[], int arr0[], int col);
+	int find(int arr[], int n, int k);
 	void permut_de(char arr[], int arr0[], int col);
 	void fence_en(char arr[], int n);
-	char arr[] = "123456789";
-	fence_en(arr,3);
+	void fence_de(char arr[], int n);
+	char arr[] = "147258369";
+	fence_de(arr,3);
 	return 0;
 }
 
@@ -316,6 +319,36 @@ void fence_en(char arr[], int n)
 			int j = i / n;
 			int k = i % n;
 			arr[i] = temp[k * m + j];
+		}
+		cout << arr << endl;
+		delete[] temp;
+	}
+	return;
+}
+
+//栅栏密码：解密
+void fence_de(char arr[], int n)
+{
+	int length = strlen(arr);
+	if (length == n || length % n != 0)
+	{
+		cout << "uneffective decryption";
+		cout << endl;
+		return;
+	}
+	else
+	{
+		char* temp = new char[length];
+		int m = length / n;
+		for (int i = 0; i < length; i++)
+		{
+			temp[i] = arr[i];
+		}
+		for (int i = 0; i < length; i++)
+		{
+			int j = i / m;
+			int k = i % m;
+			arr[i] = temp[k * n + j];
 		}
 		cout << arr << endl;
 		delete[] temp;
