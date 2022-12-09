@@ -9,6 +9,7 @@ int main()
 	void caesar_en(char arr[], int n1, int n2);
 	char caesar_de_class(char n, int m);
 	void caesar_de(char arr[], int n1, int n2);
+	void caesar_de_nokey(char arr[]);
 	int gcd(int a, int b);
 	void affine_en(char arr[], int a1, int b1, int a2, int b2);
 	int bezout(int a, int n);
@@ -19,8 +20,10 @@ int main()
 	void permut_de(char arr[], int arr0[], int col);
 	void fence_en(char arr[], int n);
 	void fence_de(char arr[], int n);
-	char arr[] = "147258369";
-	fence_de(arr,3);
+	//char arr[] = "abcdef 123456 ABCDEF";
+	char arr[] = "defghi 456789 DEFGHI";
+	caesar_de_nokey(arr);
+	//caesar_de(arr,3,3);
 	return 0;
 }
 
@@ -89,6 +92,60 @@ void caesar_de(char arr[], int n1, int n2)
 		}
 		cout << arr << endl;
 	}
+	return;
+}
+
+//凯撒密码无秘钥解密
+void caesar_de_nokey(char arr[])
+{
+	//先遍历字母的秘钥
+	for (int l = 1; l < 26; l++)
+	{
+		cout << "key of letters = " << l << ":";
+		for (int i = 0; arr[i] != '\0'; i++)
+		{
+			if (arr[i] >= 'a' && arr[i] <= 'z')
+				cout << char(caesar_de_class(arr[i] - l - 'a', 26) + 'a');
+			else if (arr[i] >= 'A' && arr[i] <= 'Z')
+				cout << char(caesar_de_class(arr[i] - l - 'A', 26) + 'A');
+			else
+				cout << arr[i];
+		}
+		cout << endl;
+	}
+	int n1 = 0;
+	cout << "please enter the key of letters you suspect" << endl;
+	cin >> n1;
+	for (int i = 0; arr[i] != '\0'; i++)
+	{
+		if (arr[i] >= 'a' && arr[i] <= 'z')
+			arr[i] = caesar_de_class(arr[i] - n1 - 'a', 26) + 'a';
+		else if (arr[i] >= 'A' && arr[i] <= 'Z')
+			arr[i] = caesar_de_class(arr[i] - n1 - 'A', 26) + 'A';
+	}
+	cout << "now the sentence is :" << arr << endl;
+	//在遍历数字的秘钥
+	for (int l = 1; l < 10; l++)
+	{
+		cout << "key of numbers = " << l << ":";
+		for (int i = 0; arr[i] != '\0'; i++)
+		{
+			if (arr[i] >= '0' && arr[i] <= '9')
+				cout << char(caesar_de_class(arr[i] - l - '0', 10) + '0');
+			else
+				cout << arr[i];
+		}
+		cout << endl;
+	}
+	int n2 = 0;
+	cout << "please enter the key of numbers you suspect" << endl;
+	cin >> n2;
+	for (int i = 0; arr[i] != '\0'; i++)
+	{
+		if (arr[i] >= '0' && arr[i] <= '9')
+			arr[i] =  caesar_de_class(arr[i] - n2 - '0', 10) + '0';
+	}
+	cout << "now the sentence is :" << arr << endl;
 	return;
 }
 
