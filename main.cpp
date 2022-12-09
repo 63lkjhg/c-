@@ -15,9 +15,9 @@ int main()
 	bool permut_test(int arr[], int n);
 	void permut_en(char arr[], int arr0[], int col);
 	void permut_de(char arr[], int arr0[], int col);
-	char arr[] = "cabfde2 143  56978B ADC  EFIGH";
-	int arr0[3] = {2,0,1};
-	permut_de(arr, arr0,3);
+	void fence_en(char arr[], int n);
+	char arr[] = "123456789";
+	fence_en(arr,3);
 	return 0;
 }
 
@@ -289,6 +289,36 @@ void permut_de(char arr[], int arr0[], int col)
 			return;
 		}
 		cout << arr << endl;
+	}
+	return;
+}
+
+//栅栏密码：加密
+void fence_en(char arr[], int n)
+{
+	int length = strlen(arr);
+	if (length == n || length % n != 0)
+	{
+		cout << "uneffective encryption";
+		cout << endl;
+		return;
+	}
+	else
+	{
+		char* temp = new char[length];
+		int m = length / n;
+		for (int i = 0; i < length; i++)
+		{
+			temp[i] = arr[i];
+		}
+		for (int i = 0; i < length; i++)
+		{
+			int j = i / n;
+			int k = i % n;
+			arr[i] = temp[k * m + j];
+		}
+		cout << arr << endl;
+		delete[] temp;
 	}
 	return;
 }
