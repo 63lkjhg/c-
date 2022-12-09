@@ -13,10 +13,11 @@ int main()
 	int bezout(int a, int n);
 	void affine_de(char arr[], int a1, int b1, int a2, int b2);
 	bool permut_test(int arr[], int n);
-	void permut_en(char arr[], int arr0[], int n);
-	char arr[] = "abcdef123";
+	void permut_en(char arr[], int arr0[], int col);
+	void permut_de(char arr[], int arr0[], int col);
+	char arr[] = "cabfde2 143  56978B ADC  EFIGH";
 	int arr0[3] = {2,0,1};
-	permut_en(arr, arr0,3);
+	permut_de(arr, arr0,3);
 	return 0;
 }
 
@@ -132,7 +133,7 @@ void affine_en(char arr[], int a1, int b1,int a2,int b2)
 	return;
 }
 
-//裴蜀定理求s
+//裴蜀定理反向求s
 int bezout(int a,int n) 
 {
 	for (int i = 1; i < n; i++) 
@@ -230,6 +231,55 @@ void permut_en(char arr[], int arr0[], int col)
 				int j = i / col;
 				int k = i % col;
 				arr[i] = temp[j * col + arr0[k]];
+			}
+			delete[] temp;
+		}
+		else
+		{
+			cout << "the length of sentence must be a multiple of column" << endl;
+			return;
+		}
+		cout << arr << endl;
+	}
+	return;
+}
+
+//在数组中找到对应的值并返回下标
+inline int find(int arr[], int n, int k)
+{
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] == k)
+			return i;
+	}
+	return -1;
+}
+
+//置换密码：解密
+void permut_de(char arr[], int arr0[], int col)
+{
+	int length = strlen(arr);
+	if (length <= col || permut_test(arr0, col) == 0)
+	{
+		cout << "uneffective decryption";
+		cout << endl;
+		return;
+	}
+	else
+	{
+		if (length % col == 0)
+		{
+			int row = length / col;
+			char* temp = new char[length];
+			for (int i = 0; i < length; i++)
+			{
+				temp[i] = arr[i];
+			}
+			for (int i = 0; i < length; i++)
+			{
+				int j = i / col;
+				int k = i % col;
+				arr[i] = temp[j * col + find(arr0,col,k)];
 			}
 			delete[] temp;
 		}
