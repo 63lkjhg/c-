@@ -22,9 +22,11 @@ int main()
 	void fence_en(char arr[], int n);
 	void fence_de(char arr[], int n);
 	void insert_char(char arr[], int n1, int n2, vector<char>&vec);
+	void remove_char(vector<char> vec, int n1, int n2);
 	char arr[] = "abcdef 123456 ABCDEF";
 	vector<char> vec;
 	insert_char(arr,2,2,vec);
+	remove_char(vec, 2, 2);
 	return 0;
 }
 
@@ -418,11 +420,8 @@ void fence_de(char arr[], int n)
 void insert_char(char arr[], int n1, int n2, vector<char>& vec)
 {
 	//vec为空vector
-	int length = strlen(arr);
 	for (int i = 0; arr[i] != '\0'; i++)
-	{
 		vec.push_back(arr[i]);
-	}
 	int temp = n1;
 	//重复原位置的字符
 	vec.insert(vec.begin() + temp,vec[temp]);
@@ -433,9 +432,32 @@ void insert_char(char arr[], int n1, int n2, vector<char>& vec)
 		{
 			temp = i;
 			vec.insert(vec.begin() + temp, vec[temp]);
-			size_vec = vec.size();
+			size_vec = vec.size();//随时更新
 		}
+	}
+	vector<char>::iterator p;
+	for (p = vec.begin(); p != vec.end(); p++)
+	{
+		cout << *p;
+	}
+	cout << endl;
+	return;
+}
 
+//从密文中移除无效字符
+void remove_char(vector<char> vec, int n1, int n2)
+{
+	int temp = n1;
+	vec.erase(vec.begin() + temp);
+	int size_vec = vec.size();
+	for (int i = n1; i < size_vec; i++)
+	{
+		if (i - temp == n2)
+		{
+			temp = i;
+			vec.erase(vec.begin() + temp);
+			size_vec = vec.size();//随时更新
+		}
 	}
 	vector<char>::iterator p;
 	for (p = vec.begin(); p != vec.end(); p++)
