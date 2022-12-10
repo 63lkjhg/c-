@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <cstring>
+#include <vector>
 using namespace std;
 
 int main()
@@ -20,10 +21,10 @@ int main()
 	void permut_de(char arr[], int arr0[], int col);
 	void fence_en(char arr[], int n);
 	void fence_de(char arr[], int n);
-	//char arr[] = "abcdef 123456 ABCDEF";
-	char arr[] = "defghi 456789 DEFGHI";
-	caesar_de_nokey(arr);
-	//caesar_de(arr,3,3);
+	void insert_char(char arr[], int n1, int n2, vector<char>&vec);
+	char arr[] = "abcdef 123456 ABCDEF";
+	vector<char> vec;
+	insert_char(arr,2,2,vec);
 	return 0;
 }
 
@@ -124,7 +125,7 @@ void caesar_de_nokey(char arr[])
 			arr[i] = caesar_de_class(arr[i] - n1 - 'A', 26) + 'A';
 	}
 	cout << "now the sentence is :" << arr << endl;
-	//在遍历数字的秘钥
+	//再遍历数字的秘钥
 	for (int l = 1; l < 10; l++)
 	{
 		cout << "key of numbers = " << l << ":";
@@ -410,5 +411,37 @@ void fence_de(char arr[], int n)
 		cout << arr << endl;
 		delete[] temp;
 	}
+	return;
+}
+
+//在密文中插入无效字符
+void insert_char(char arr[], int n1, int n2, vector<char>& vec)
+{
+	//vec为空vector
+	int length = strlen(arr);
+	for (int i = 0; arr[i] != '\0'; i++)
+	{
+		vec.push_back(arr[i]);
+	}
+	int temp = n1;
+	//重复原位置的字符
+	vec.insert(vec.begin() + temp,vec[temp]);
+	int size_vec = vec.size();
+	for (int i = n1; i < size_vec; i++)
+	{
+		if (i - temp == n2 + 1)
+		{
+			temp = i;
+			vec.insert(vec.begin() + temp, vec[temp]);
+			size_vec = vec.size();
+		}
+
+	}
+	vector<char>::iterator p;
+	for (p = vec.begin(); p != vec.end(); p++)
+	{
+		cout << *p;
+	}
+	cout << endl;
 	return;
 }
