@@ -8,6 +8,8 @@ using namespace std;
 int main()
 {
 	//可能用到的函数声明
+	void showmenu_1();
+	void showmenu_2_1();
 	void caesar_en(char arr[], int n1, int n2);
 	char caesar_de_class(char n, int m);
 	void caesar_de(char arr[], int n1, int n2);
@@ -25,11 +27,57 @@ int main()
 	char rand_char();
 	void insert_char(char arr[], int n1, int n2, vector<char>&vec);
 	void remove_char(vector<char> vec, int n1, int n2);
-	char arr[] = "abcdef 123456 ABCDEF";
-	vector<char> vec;
-	insert_char(arr,2,2,vec);
-	remove_char(vec, 2, 2);
+	//交互菜单
+	int n1 = 0;
+	showmenu_1();
+	cin >> n1;
+	while (n1 != 3)
+	{
+		switch (n1)
+		{
+		case 1: 
+		{
+			cout << "please enter the length of the sentence(can only include letters,numbers and spaces)" << endl;
+			int size;
+			cin >> size;
+			char* arr = new char[size];
+			cout << "please enter the sentence to be encrypted" << endl;
+			cin >> arr;
+			int n2_1 = 0;
+			showmenu_2_1();
+			cin >> n2_1;
+			delete[] arr;
+			break; 
+		}
+		case 2:
+		{
+			break; 
+		}
+		default: 
+		{
+			cout << "invalid number, please enter another number" << endl;
+			break; 
+		}
+		}
+		showmenu_1();
+		cin >> n1;
+	}
+	cout << "bye!";
 	return 0;
+}
+
+//一层菜单
+void showmenu_1()
+{
+	cout << "press 1 to encrypt or press 2 to decrypt" << endl;
+	cout << "press 3 to exit the program" << endl;
+}
+
+//二层菜单：加密
+void showmenu_2_1()
+{
+	cout << "1:caesar,2:affine,3:(column)permutation,4:fence,5:insert invalid characters" << endl;
+	cout << "6:exit" << endl;
 }
 
 //凯撒密码：加密
