@@ -2,6 +2,7 @@
 #include <cmath>
 #include <cstring>
 #include <vector>
+#include <cstdlib>
 using namespace std;
 
 int main()
@@ -21,6 +22,7 @@ int main()
 	void permut_de(char arr[], int arr0[], int col);
 	void fence_en(char arr[], int n);
 	void fence_de(char arr[], int n);
+	char rand_char();
 	void insert_char(char arr[], int n1, int n2, vector<char>&vec);
 	void remove_char(vector<char> vec, int n1, int n2);
 	char arr[] = "abcdef 123456 ABCDEF";
@@ -416,22 +418,29 @@ void fence_de(char arr[], int n)
 	return;
 }
 
+//生成随机字符
+inline char rand_char()
+{
+	char temp[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
+	return char(temp[rand() % 63]);
+}
+
 //在密文中插入无效字符
 void insert_char(char arr[], int n1, int n2, vector<char>& vec)
 {
 	//vec为空vector
 	for (int i = 0; arr[i] != '\0'; i++)
 		vec.push_back(arr[i]);
+	srand((unsigned)time(NULL));//随机数种子，放在循环外面
 	int temp = n1;
-	//重复原位置的字符
-	vec.insert(vec.begin() + temp,vec[temp]);
+	vec.insert(vec.begin() + temp,rand_char());
 	int size_vec = vec.size();
 	for (int i = n1; i < size_vec; i++)
 	{
 		if (i - temp == n2 + 1)
 		{
 			temp = i;
-			vec.insert(vec.begin() + temp, vec[temp]);
+			vec.insert(vec.begin() + temp,rand_char());
 			size_vec = vec.size();//随时更新
 		}
 	}
