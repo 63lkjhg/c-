@@ -5,49 +5,102 @@
 #include <cstdlib>
 using namespace std;
 
+//可能用到的函数声明
+void showmenu_1();
+void showmenu_2_1();
+void caesar_en(char arr[], int n1, int n2);
+char caesar_de_class(char n, int m);
+void caesar_de(char arr[], int n1, int n2);
+void caesar_de_nokey(char arr[]);
+int gcd(int a, int b);
+void affine_en(char arr[], int a1, int b1, int a2, int b2);
+int bezout(int a, int n);
+void affine_de(char arr[], int a1, int b1, int a2, int b2);
+bool permut_test(int arr[], int n);
+void permut_en(char arr[], int arr0[], int col);
+int find(int arr[], int n, int k);
+void permut_de(char arr[], int arr0[], int col);
+void fence_en(char arr[], int n);
+void fence_de(char arr[], int n);
+char rand_char();
+void insert_char(char arr[], int n1, int n2, vector<char>& vec);
+void remove_char(vector<char> vec, int n1, int n2);
+
 int main()
 {
-	//可能用到的函数声明
-	void showmenu_1();
-	void showmenu_2_1();
-	void caesar_en(char arr[], int n1, int n2);
-	char caesar_de_class(char n, int m);
-	void caesar_de(char arr[], int n1, int n2);
-	void caesar_de_nokey(char arr[]);
-	int gcd(int a, int b);
-	void affine_en(char arr[], int a1, int b1, int a2, int b2);
-	int bezout(int a, int n);
-	void affine_de(char arr[], int a1, int b1, int a2, int b2);
-	bool permut_test(int arr[], int n);
-	void permut_en(char arr[], int arr0[], int col);
-	int find(int arr[], int n, int k);
-	void permut_de(char arr[], int arr0[], int col);
-	void fence_en(char arr[], int n);
-	void fence_de(char arr[], int n);
-	char rand_char();
-	void insert_char(char arr[], int n1, int n2, vector<char>&vec);
-	void remove_char(vector<char> vec, int n1, int n2);
 	//交互菜单
-	int n1 = 0;
+	int choice1 = 0;
 	showmenu_1();
-	cin >> n1;
-	while (n1 != 3)
+	cin >> choice1;
+	while (choice1 != 3)
 	{
-		switch (n1)
+		switch (choice1)
 		{
 		case 1: 
-		{
-			cout << "please enter the length of the sentence(can only include letters,numbers and spaces)" << endl;
-			int size;
-			cin >> size;
-			char* arr = new char[size];
-			cout << "please enter the sentence to be encrypted" << endl;
-			cin >> arr;
-			int n2_1 = 0;
+		{//case里面定义变量要用{}括起来
+			
+			int choice2_1 = 0;
 			showmenu_2_1();
-			cin >> n2_1;
-			delete[] arr;
-			break; 
+			cin >> choice2_1;
+			while (choice2_1 != 6)
+			{
+				cout << "please enter the length of the sentence(can only include letters,numbers and spaces)" << endl;
+				int size;
+				cin >> size;
+				char* arr = new char[size];
+				cout << "please enter the sentence to be encrypted" << endl;
+				cin >> arr;
+				switch (choice2_1)
+				{
+				case 1: 
+				{
+					int n1, n2;
+					cout << "please enter the key to letters" << endl;
+					cin >> n1;
+					cout << "please enter the key to numbers" << endl;
+					cin >> n2;
+					caesar_en(arr, n1, n2);
+					break;
+				}
+				case 2:
+				{
+					int a1, b1, a2, b2;
+					cout << "please enter the key to letters" << endl;
+					cin >> a1;
+					cin >> b1;
+					cout << "please enter the key to numbers" << endl;
+					cin >> a2;
+					cin >> b2;
+					affine_en(arr,a1,b1,a2,b2);
+					break;
+				}
+				case 3:
+				{
+					int col = 0;
+					cout << "please enter the number of column" << endl;
+					cin >> col;
+					cout << "please enter the key of permutation" << endl;
+					cout << "example: [1 0 2] means to swap the second and the first column,the third column doesn`t move" << endl;
+					cout << "ATTENTION: the numbers should separated by the Enter key" << endl;
+					int* arr0 = new int[col];
+					for (int i = 0; i < col; i++)
+					{
+						cin >> arr0[i];
+					}
+					permut_en(arr,arr0, col);
+					delete[] arr0;
+				}
+				default:
+				{
+					cout << "invalid number, please enter another number" << endl;
+					break;
+				}
+				delete[] arr;
+				}
+				showmenu_2_1();
+				cin >> choice2_1;
+			}
+			break;
 		}
 		case 2:
 		{
@@ -60,7 +113,7 @@ int main()
 		}
 		}
 		showmenu_1();
-		cin >> n1;
+		cin >> choice1;
 	}
 	cout << "bye!";
 	return 0;
