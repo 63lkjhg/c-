@@ -55,9 +55,9 @@ int main()
 				case 1: 
 				{
 					int n1, n2;
-					cout << "please enter the key to letters" << endl;
+					cout << "please enter the key to letters(1-25)" << endl;
 					cin >> n1;
-					cout << "please enter the key to numbers" << endl;
+					cout << "please enter the key to numbers(1-9)" << endl;
 					cin >> n2;
 					caesar_en(arr, n1, n2);
 					break;
@@ -65,10 +65,10 @@ int main()
 				case 2:
 				{
 					int a1, b1, a2, b2;
-					cout << "please enter the key to letters" << endl;
+					cout << "please enter the key to letters(a should be coprime with 26)" << endl;
 					cin >> a1;
 					cin >> b1;
-					cout << "please enter the key to numbers" << endl;
+					cout << "please enter the key to numbers(a should be coprime with 10)" << endl;
 					cin >> a2;
 					cin >> b2;
 					affine_en(arr,a1,b1,a2,b2);
@@ -77,7 +77,7 @@ int main()
 				case 3:
 				{
 					int col = 0;
-					cout << "please enter the number of column" << endl;
+					cout << "please enter the number of column(divisible by the length of sentence)" << endl;
 					cin >> col;
 					cout << "please enter the key of permutation" << endl;
 					cout << "example: [1 0 2] means to swap the second and the first column,the third column doesn`t move" << endl;
@@ -89,6 +89,25 @@ int main()
 					}
 					permut_en(arr,arr0, col);
 					delete[] arr0;
+					break;
+				}
+				case 4:
+				{
+					int n = 0;
+				    cout << "please enter the key(divisible by the length of sentence)" << endl;
+					cin >> n;
+					fence_en(arr,n);
+					break;
+				}
+				case 5:
+				{
+					int n1, n2;
+					cout << "enter the index that the first invalid character occur(start from 0)" << endl;
+					cin >> n1;
+					cout << "enter the numbers of characters between two invalid characters" << endl;
+					cin >> n2;
+					vector<char> vec;
+					insert_char(arr, n1, n2, vec);
 				}
 				default:
 				{
