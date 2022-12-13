@@ -8,6 +8,7 @@ using namespace std;
 //可能用到的函数声明
 void showmenu_1();
 void showmenu_2_1();
+void showmenu_2_2();
 void caesar_en(char arr[], int n1, int n2);
 char caesar_de_class(char n, int m);
 void caesar_de(char arr[], int n1, int n2);
@@ -32,13 +33,13 @@ int main()
 	int choice1 = 0;
 	showmenu_1();
 	cin >> choice1;
+	vector<char> vec;//提前声明可能在switch两个分支里面都会用到的vector
 	while (choice1 != 3)
 	{
 		switch (choice1)
 		{
 		case 1: 
 		{//case里面定义变量要用{}括起来
-			
 			int choice2_1 = 0;
 			showmenu_2_1();
 			cin >> choice2_1;
@@ -106,8 +107,8 @@ int main()
 					cin >> n1;
 					cout << "enter the numbers of characters between two invalid characters" << endl;
 					cin >> n2;
-					vector<char> vec;
 					insert_char(arr, n1, n2, vec);
+					break;
 				}
 				default:
 				{
@@ -123,7 +124,104 @@ int main()
 		}
 		case 2:
 		{
-			break; 
+			int choice2_2 = 0;
+			showmenu_2_2();
+			cin >> choice2_2;
+			while (choice2_2 != 6)
+			{
+				cout << "please enter the length of the sentence(can only include letters,numbers and spaces)" << endl;
+				int size;
+				cin >> size;
+				char* arr = new char[size];
+				cout << "please enter the sentence to be encrypted" << endl;
+				cin >> arr;
+				switch (choice2_2)
+				{
+				case 0:
+				{
+					caesar_de_nokey(arr);
+					break;
+				}
+				case 1:
+				{
+					int n1, n2;
+					cout << "please enter the key to letters(1-25)" << endl;
+					cin >> n1;
+					cout << "please enter the key to numbers(1-9)" << endl;
+					cin >> n2;
+					caesar_de(arr, n1, n2);
+					break;
+				}
+				case 2:
+				{
+					int a1, b1, a2, b2;
+					cout << "please enter the key to letters(a should be coprime with 26)" << endl;
+					cin >> a1;
+					cin >> b1;
+					cout << "please enter the key to numbers(a should be coprime with 10)" << endl;
+					cin >> a2;
+					cin >> b2;
+					affine_de(arr, a1, b1, a2, b2);
+					break;
+				}
+				case 3:
+				{
+					int col = 0;
+					cout << "please enter the number of column(divisible by the length of sentence)" << endl;
+					cin >> col;
+					cout << "please enter the key of permutation" << endl;
+					cout << "example: [1 0 2] means to swap the second and the first column,the third column doesn`t move" << endl;
+					cout << "ATTENTION: the numbers should separated by the Enter key" << endl;
+					int* arr0 = new int[col];
+					for (int i = 0; i < col; i++)
+					{
+						cin >> arr0[i];
+					}
+					permut_de(arr, arr0, col);
+					delete[] arr0;
+					break;
+				}
+				case 4:
+				{
+					int n = 0;
+					cout << "please enter the key(divisible by the length of sentence)" << endl;
+					cin >> n;
+					fence_de(arr, n);
+					break;
+				}
+				case 5:
+				{
+					int n1, n2;
+					cout << "enter the index that the first invalid character occur(start from 0)" << endl;
+					cin >> n1;
+					cout << "enter the numbers of characters between two invalid characters" << endl;
+					cin >> n2;
+					cout << "is the sentence to be modified in the cpu? 1:yes 0:no" << endl;
+					int n3 = 0;
+					cin >> n3;
+					if (n3)
+						remove_char(vec, n1, n2);
+					else
+					{
+						vector<char> vec;
+						int length = strlen(arr);
+						for (int i = 0; i < length; i++)
+							vec.push_back(arr[i]);
+						remove_char(vec, n1, n2);
+					}
+					break;
+				}
+				default:
+				{
+					cout << "invalid number, please enter another number" << endl;
+					break;
+				}
+				delete[] arr;
+				}
+				showmenu_2_2();
+				cin >> choice2_2;
+			}
+			break;
 		}
 		default: 
 		{
@@ -149,6 +247,13 @@ void showmenu_1()
 void showmenu_2_1()
 {
 	cout << "1:caesar,2:affine,3:(column)permutation,4:fence,5:insert invalid characters" << endl;
+	cout << "6:exit" << endl;
+}
+
+//二层菜单：解密
+void showmenu_2_2()
+{
+	cout << "0:caesar without key,1:caesar,2:affine,3:(column)permutation,4:fence,5:insert invalid characters" << endl;
 	cout << "6:exit" << endl;
 }
 
