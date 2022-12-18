@@ -337,10 +337,10 @@ void caesar_de(char arr[], int n1, int n2)
 	return;
 }
 
-//凯撒密码无秘钥解密
+//凯撒密码无密钥解密
 void caesar_de_nokey(char arr[])
 {
-	//先遍历字母的秘钥
+	//先遍历字母的密钥
 	for (int l = 1; l < 26; l++)
 	{
 		cout << "key of letters = " << l << ":";
@@ -366,7 +366,7 @@ void caesar_de_nokey(char arr[])
 			arr[i] = caesar_de_class(arr[i] - n1 - 'A', 26) + 'A';
 	}
 	cout << "now the sentence is :" << arr << endl;
-	//再遍历数字的秘钥
+	//再遍历数字的密钥
 	for (int l = 1; l < 10; l++)
 	{
 		cout << "key of numbers = " << l << ":";
