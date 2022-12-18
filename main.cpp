@@ -45,6 +45,12 @@ int main()
 			cin >> choice2_1;
 			while (choice2_1 != 6)
 			{
+				if (choice2_1 < 1 || choice2_1 > 6)
+				{
+					cout << "invalid choice, please enter the number again" << endl;
+					cin >> choice2_1;
+					continue;//结束本次循环重新检验
+				}
 				cout << "please enter the length of the sentence(can only include letters,numbers and spaces)" << endl;
 				int size;
 				cin >> size;
@@ -82,7 +88,7 @@ int main()
 					cin >> col;
 					cout << "please enter the key of permutation" << endl;
 					cout << "example: [1 0 2] means to swap the second and the first column,the third column doesn`t move" << endl;
-					cout << "ATTENTION: the numbers should separated by the Enter key" << endl;
+					cout << "ATTENTION: the numbers should be separated by the Enter key" << endl;
 					int* arr0 = new int[col];
 					for (int i = 0; i < col; i++)
 					{
@@ -95,7 +101,7 @@ int main()
 				case 4:
 				{
 					int n = 0;
-				    cout << "please enter the key(divisible by the length of sentence)" << endl;
+				    cout << "please enter the key(the length of sentence should be divisible by the key)" << endl;
 					cin >> n;
 					fence_en(arr,n);
 					break;
@@ -129,11 +135,17 @@ int main()
 			cin >> choice2_2;
 			while (choice2_2 != 6)
 			{
+				if (choice2_2 < 0 || choice2_2 > 6)
+				{
+					cout << "invalid choice, please enter the number again" << endl;
+					cin >> choice2_2;
+					continue;//结束本次循环重新检验
+				}
 				cout << "please enter the length of the sentence(can only include letters,numbers and spaces)" << endl;
 				int size;
 				cin >> size;
 				char* arr = new char[size];
-				cout << "please enter the sentence to be encrypted" << endl;
+				cout << "please enter the sentence to be decrypted" << endl;
 				cin >> arr;
 				switch (choice2_2)
 				{
@@ -171,7 +183,7 @@ int main()
 					cin >> col;
 					cout << "please enter the key of permutation" << endl;
 					cout << "example: [1 0 2] means to swap the second and the first column,the third column doesn`t move" << endl;
-					cout << "ATTENTION: the numbers should separated by the Enter key" << endl;
+					cout << "ATTENTION: the numbers should be separated by the Enter key" << endl;
 					int* arr0 = new int[col];
 					for (int i = 0; i < col; i++)
 					{
@@ -184,7 +196,7 @@ int main()
 				case 4:
 				{
 					int n = 0;
-					cout << "please enter the key(divisible by the length of sentence)" << endl;
+					cout << "please enter the key(the length of sentence should be divisible by the key)" << endl;
 					cin >> n;
 					fence_de(arr, n);
 					break;
